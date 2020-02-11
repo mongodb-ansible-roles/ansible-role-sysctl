@@ -1,0 +1,25 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: debian10
+    image: debian:10
+  - name: rhel8
+    image: registry.redhat.io/ubi8
+    privileged: true
+  - name: amazon2
+    image: geerlingguy/docker-amazonlinux2-ansible
+  - name: suse15
+    image: opensuse/leap
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

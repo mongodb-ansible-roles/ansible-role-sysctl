@@ -1,0 +1,12 @@
+---
+# We need the sysctl binary
+# Mercifully it is part of the same package name on all platforms
+- gather_facts: false
+  name: Prepare
+  hosts: all
+  tasks:
+    - name: Install procps if it's not there (sysctl)
+      package:
+        name:
+          - procps
+        state: present
