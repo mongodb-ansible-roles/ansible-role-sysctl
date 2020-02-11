@@ -9,8 +9,7 @@ platforms:
   - name: debian10
     image: debian:10
   - name: rhel8
-    image: registry.redhat.io/ubi8
-    privileged: true
+    image: centos:8
   - name: amazon2
     image: geerlingguy/docker-amazonlinux2-ansible
   - name: suse15
@@ -19,6 +18,7 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
+  no_log: false
 verifier:
   name: testinfra
   lint:
