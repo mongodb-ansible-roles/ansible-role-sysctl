@@ -1,0 +1,12 @@
+---
+- become: true
+  name: Converge
+  hosts: all
+  vars:
+    kernel_params:
+      - kernel_param_name: net.ipv4.tcp_fastopen
+        kernel_param_value: 3
+      - kernel_param_name: net.ipv4.tcp_max_syn_backlog
+        kernel_param_value: 8192
+  roles:
+    - role: ansible-role-sysctl

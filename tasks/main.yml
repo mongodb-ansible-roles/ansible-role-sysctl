@@ -4,11 +4,12 @@
     linux_kernel_version: '{{ ansible_kernel.split("-")[0].split(".")[:2] | join(".") }}'
 
 # Only run this on linux with kernel versions higher than 4.11
-- name: Enable TCP_FASTOPEN
+- name: Enable '{{ item.kernel_param_name }}'
   sysctl:
-    name: net.ipv4.tcp_fastopen
-    value: '3'
+    name: '{{ item.kernel_param_name }}'
+    value: '{{ item.kernel_param_value }}'
     state: present
     reload: no
+  with_items: '{{ kernel_params }}'
   when:
     linux_kernel_version is version('4.11', '>=')

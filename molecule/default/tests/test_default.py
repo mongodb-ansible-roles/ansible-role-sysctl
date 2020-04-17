@@ -13,3 +13,5 @@ def test_host(host):
 
 def test_sysctl_conf(host):
     assert host.file("/etc/sysctl.conf").contains("net.ipv4.tcp_fastopen=3")
+    assert host.file("/etc/sysctl.conf") \
+        .contains("net.ipv4.tcp_max_syn_backlog=8192")

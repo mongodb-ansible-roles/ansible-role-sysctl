@@ -3,23 +3,19 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 platforms:
   - name: debian10
     image: debian:10
   - name: rhel8
     image: centos:8
-  - name: amazon2
-    image: geerlingguy/docker-amazonlinux2-ansible
   - name: suse15
     image: opensuse/leap
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
-  no_log: false
 verifier:
   name: testinfra
-  lint:
-    name: flake8
