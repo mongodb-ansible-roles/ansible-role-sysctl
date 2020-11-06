@@ -1,15 +1,8 @@
 ---
-- name: Get Linux Kernel Version
-  set_fact:
-    linux_kernel_version: '{{ ansible_kernel.split("-")[0].split(".")[:2] | join(".") }}'
-
-# Only run this on linux with kernel versions higher than 4.11
-- name: Enable '{{ item.kernel_param_name }}'
+- name: Enable "{{ item.kernel_param_name }}"
   sysctl:
-    name: '{{ item.kernel_param_name }}'
-    value: '{{ item.kernel_param_value }}'
+    name: "{{ item.kernel_param_name }}"
+    reload: false
     state: present
-    reload: no
-  with_items: '{{ kernel_params }}'
-  when:
-    linux_kernel_version is version('4.11', '>=')
+    value: "{{ item.kernel_param_value }}"
+  with_items: "{{ kernel_params }}"
